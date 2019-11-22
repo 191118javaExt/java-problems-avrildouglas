@@ -3,6 +3,7 @@ package com.revature.eval.java.core;
 import java.time.temporal.Temporal;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 
 public class EvaluationService {
 
@@ -13,11 +14,18 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public String reverse(String string) {
-		
-		return "";
-	}
+	public static String reverse(String string) {
 
+		String reverse = "";
+		for (int i = string.length()-1; i >= 0; i-- ) {
+			reverse = reverse + string.charAt(i);
+		}
+		System.out.println(reverse);
+		return reverse;
+
+	}
+	
+		
 	/**
 	 * 2. Convert a phrase to its acronym. Techies love their TLA (Three Letter
 	 * Acronyms)! Help generate some jargon by writing a program that converts a
@@ -26,11 +34,33 @@ public class EvaluationService {
 	 * @param phrase
 	 * @return
 	 */
-	public String acronym(String phrase) {
+	public static String acronym(String phrase) {
+		String [] tokens = phrase.split("[\\W]");
+		String newString = "";
+		for(String s:tokens){
+		    newString += s.charAt(0);
+		}
+	//	System.out.println("Acronym - " + newString);
+		
 		// TODO Write an implementation for this method declaration
-		return null;
+		//return null;
+		System.out.println(newString);
+		return "Acronym - " + newString;
+		
 	}
 
+	/*public static void main(String[] args)
+    {
+        System.out.println("Enter word to convert to acronym:");
+        
+        Scanner read = new Scanner(System.in);
+        String str = read.nextLine();
+        acronym(str);
+		
+	}*/
+	
+	
+	
 	/**
 	 * 3. Determine if a triangle is equilateral, isosceles, or scalene. An
 	 * equilateral triangle has all three sides the same length. An isosceles
