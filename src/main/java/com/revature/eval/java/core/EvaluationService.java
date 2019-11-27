@@ -14,18 +14,18 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
-	public static String reverse(String string) {
+	public String reverse(String string) {
 
 		String reverse = "";
 		for (int i = string.length()-1; i >= 0; i-- ) {
 			reverse = reverse + string.charAt(i);
 		}
-		System.out.println(reverse);
+	//	System.out.println(reverse);
 		return reverse;
 
 	}
 	
-		
+			
 	/**
 	 * 2. Convert a phrase to its acronym. Techies love their TLA (Three Letter
 	 * Acronyms)! Help generate some jargon by writing a program that converts a
@@ -34,17 +34,12 @@ public class EvaluationService {
 	 * @param phrase
 	 * @return
 	 */
-	public static String acronym(String phrase) {
+	public String acronym(String phrase) {
 		String [] tokens = phrase.split("[\\W]");
 		String newString = "";
 		for(String s:tokens){
 		    newString += s.charAt(0);
 		}
-	//	System.out.println("Acronym - " + newString);
-		
-		// TODO Write an implementation for this method declaration
-		//return null;
-		System.out.println(newString);
 		return "Acronym - " + newString;
 		
 	}
@@ -58,7 +53,6 @@ public class EvaluationService {
         acronym(str);
 		
 	}*/
-	
 	
 	
 	/**
@@ -111,38 +105,95 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if ((sideOne == sideTwo) && (sideOne == sideThree))
+				return true;
+			else
+				return false;
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if (((sideOne == sideTwo) && (sideOne != sideThree)) ||
+				((sideOne == sideThree) && (sideOne != sideTwo)) ||
+				((sideTwo == sideThree) && (sideTwo != sideOne)))
+				return true;
+			else
+			
+				return false;
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			if ((sideOne != sideTwo) && (sideOne != sideThree) && (sideTwo != sideThree))
+				return true;
+			else						
+				return false;
 		}
+/* 4. Given a word, compute the scrabble score for that word.
 
-	}
+	  --Letter Values-- Letter Value A, E, I, O, U, L, N, R, S, T = 1; D, G = 2; B,
+	  C, M, P = 3; F, H, V, W, Y = 4; K = 5; J, X = 8; Q, Z = 10; Examples
+	  "cabbage" should be scored as worth 14 points:
 
-	/**
-	 * 4. Given a word, compute the scrabble score for that word.
-	 * 
-	 * --Letter Values-- Letter Value A, E, I, O, U, L, N, R, S, T = 1; D, G = 2; B,
-	 * C, M, P = 3; F, H, V, W, Y = 4; K = 5; J, X = 8; Q, Z = 10; Examples
-	 * "cabbage" should be scored as worth 14 points:
-	 * 
-	 * 3 points for C, 1 point for A, twice 3 points for B, twice 2 points for G, 1
-	 * point for E And to total:
-	 * 
-	 * 3 + 2*1 + 2*3 + 2 + 1 = 3 + 2 + 6 + 3 = 5 + 9 = 14
-	 * 
-	 * @param string
-	 * @return
+	  3 points for C, 1 point for A, twice 3 points for B, twice 2 points for G, 1
+	  point for E And to total:
+
+	  3 + 2*1 + 2*3 + 2 + 1 = 3 + 2 + 6 + 3 = 5 + 9 = 14
+
+	  @param string
+	  @return
 	 */
+		
+	public int scrabbleLetterValue(char tile) {
+			
+			switch (tile) {
+			case 'A':
+			case 'E':
+			case 'I':
+			case 'O':
+			case 'U':
+			case 'L':
+			case 'N':
+			case 'R':
+			case 'S':
+			case 'T':
+				return 1;
+			case 'D':
+			case 'G':
+				return 2;
+			case 'B':
+			case 'C':
+			case 'M':
+			case 'P':
+				return 3;
+			case 'F':
+			case 'H':
+				
+			
+				
+			
+				
+			}
+			
 	public int getScrabbleScore(String string) {
+		int scrabbleScore;
+		
+		
+		for (int i = 0; i < string.length(); i++) {
+			
+			scrabbleScore += scrabbleLetterValue(string.charAt(i));
+			
+		}
+		return scrabbleScore;
+	}
+	
+
+	this. = string.toLowerCase();
+		
+	
+	
+		
+		
+
+	
 		// TODO Write an implementation for this method declaration
 		return 0;
 	}
