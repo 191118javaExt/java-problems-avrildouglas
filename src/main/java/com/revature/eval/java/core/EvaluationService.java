@@ -1,6 +1,9 @@
 package com.revature.eval.java.core;
 
+//import static org.junit.Assert.assertEquals;
+
 import java.time.temporal.Temporal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -20,7 +23,6 @@ public class EvaluationService {
 		for (int i = string.length()-1; i >= 0; i-- ) {
 			reverse = reverse + string.charAt(i);
 		}
-	//	System.out.println(reverse);
 		return reverse;
 
 	}
@@ -127,7 +129,8 @@ public class EvaluationService {
 			else						
 				return false;
 		}
-/* 4. Given a word, compute the scrabble score for that word.
+
+		/* 4. Given a word, compute the scrabble score for that word.
 
 	  --Letter Values-- Letter Value A, E, I, O, U, L, N, R, S, T = 1; D, G = 2; B,
 	  C, M, P = 3; F, H, V, W, Y = 4; K = 5; J, X = 8; Q, Z = 10; Examples
@@ -141,10 +144,26 @@ public class EvaluationService {
 	  @param string
 	  @return
 	 */
-		
-	public int scrabbleLetterValue(char tile) {
+	
+		public int getScrabbleScore(String string) {
 			
-			switch (tile) {
+			System.out.println(string);
+			
+		       string.toUpperCase();
+				
+		       int scrabbleScore = 0;	
+				
+				for (int i = 0; i < string.length(); i++) {	
+					scrabbleScore += scrabbleLetterPick(string.charAt(i));
+				}
+				System.out.println(scrabbleScore);
+				return scrabbleScore;
+			}
+		}
+    
+	    public static int scrabbleLetterPick(char letter) {
+			
+			switch (letter) {
 			case 'A':
 			case 'E':
 			case 'I':
@@ -156,48 +175,35 @@ public class EvaluationService {
 			case 'S':
 			case 'T':
 				return 1;
-			case 'D':
+				case 'D':
 			case 'G':
 				return 2;
-			case 'B':
+				case 'B':
 			case 'C':
 			case 'M':
 			case 'P':
 				return 3;
 			case 'F':
 			case 'H':
-				
-			
-				
-			
-				
+			case 'V':
+			case 'W':
+			case 'Y':
+				return 4;
+			case 'K':
+				return 5;
+			case 'J':
+			case 'X':
+				return 8;
+			case 'Q':
+			case 'Z':
+				return 10;
+			default:
+				return -1;
 			}
-			
-	public int getScrabbleScore(String string) {
-		int scrabbleScore;
-		
-		
-		for (int i = 0; i < string.length(); i++) {
-			
-			scrabbleScore += scrabbleLetterValue(string.charAt(i));
-			
-		}
-		return scrabbleScore;
+	
 	}
+    		
 	
-
-	this. = string.toLowerCase();
-		
-	
-	
-		
-		
-
-	
-		// TODO Write an implementation for this method declaration
-		return 0;
-	}
-
 	/**
 	 * 5. Clean up user-entered phone numbers so that they can be sent SMS messages.
 	 * 
@@ -230,8 +236,12 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+
+		String subscriber = string.replaceAll("[/()-/+\\s]", "");
+		if (subscriber.charAt(0) == '1') {
+			subscriber = subscriber.substring(1).trim();
+		}
+		return subscriber;
 	}
 
 	/**
@@ -244,10 +254,19 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Map<String, Integer> wordCount(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+	
+		String str = string.replace(",", " ").replace("\n", "");
+		String[] splitWord = str.split(" ");
+		HashMap<String, Integer> repeatWords = new HashMap<String, Integer>();
+		for (String a: splitWord) {
+			if (!repeatWords.containsKey(a)) {
+				repeatWords.put(a, 1);
+			}else {
+				repeatWords.put(a, repeatWords.get(a) + 1);
+			}
+		}
+		return repeatWords;
 	}
-
 	/**
 	 * 7. Implement a binary search algorithm.
 	 * 

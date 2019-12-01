@@ -230,7 +230,7 @@ public class EvaluationServiceTest {
 		assertEquals(expectedWordCount, actualWordCount);
 	}
 
-	@Test
+	@Test   
 	public void handlesCrampedLists() {
 		Map<String, Integer> expectedWordCount = new HashMap<>();
 		expectedWordCount.put("one", 1);
