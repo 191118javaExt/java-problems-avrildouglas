@@ -130,6 +130,7 @@ public class EvaluationService {
 			else						
 				return false;
 		}
+	}
 
 		/* 4. Given a word, compute the scrabble score for that word.
 
@@ -145,8 +146,10 @@ public class EvaluationService {
 	  @param string
 	  @return
 	 */
+		
+		
 	
-		public int getScrabbleScore(String string) {
+		public  int getScrabbleScore(String string) {
 					
 		       string.toUpperCase();
 				
@@ -157,8 +160,7 @@ public class EvaluationService {
 				}
 				return scrabbleScore;
 			}
-		}
-    
+		    
 	    public static int scrabbleLetterPick(char letter) {
 			
 			switch (letter) {
@@ -710,26 +712,6 @@ public class EvaluationService {
 	 */
 	public boolean isLuhnValid(String string) {
 		
-		System.out.println(string);
-		/*int sum = 0;
-        boolean alternate = false;
-        for (int i = string.length() - 1; i >= 0; i--)
-        {
-            int n = Integer.parseInt(string.substring(i, i + 1));
-            if (alternate)
-            {
-                n *= 2;
-                if (n > 9)
-                {
-                    n = (n % 10) + 1;
-                }
-            }
-            sum += n;
-            alternate = !alternate;
-        }
-       //System.out.println(sum % 10 == 0);
-        System.out.println(alternate);*/
-		
 		int[] ints = new int[string.length()];
 		
 		System.out.println(string.length());
@@ -752,9 +734,7 @@ public class EvaluationService {
 			System.out.println(string + " is a valid credit card number");
 		} else {
 			System.out.println(string + " is an invalid credit card number");
-		}
-		//return false;
-			
+		}		
 		return (sum % 10 == 0);
     
 	}
@@ -792,3 +772,4 @@ public class EvaluationService {
 	}
 
 }
+
