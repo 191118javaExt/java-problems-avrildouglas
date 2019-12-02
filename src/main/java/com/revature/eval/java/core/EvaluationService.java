@@ -3,6 +3,8 @@ package com.revature.eval.java.core;
 //import static org.junit.Assert.assertEquals;
 
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -147,7 +149,7 @@ public class EvaluationService {
 	
 		public int getScrabbleScore(String string) {
 			
-			System.out.println(string);
+		//	System.out.println(string);
 			
 		       string.toUpperCase();
 				
@@ -156,7 +158,7 @@ public class EvaluationService {
 				for (int i = 0; i < string.length(); i++) {	
 					scrabbleScore += scrabbleLetterPick(string.charAt(i));
 				}
-				System.out.println(scrabbleScore);
+		//		System.out.println(scrabbleScore);
 				return scrabbleScore;
 			}
 		}
@@ -342,10 +344,35 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+
 	public String toPigLatin(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
-	}
+		//"apple"    "appleay"
+		//"therapy"   "erapythay"
+		//"school"    "oolschay"
+		
+		    char a = 'a';
+		    char e = 'e';
+		    char i = 'i';
+		    char o = 'o';
+		    char u = 'u';
+
+		    int start = 0;
+		    int firstVowel = 0;
+		    int end = string.length();
+		    for(int x = 0; x < end; x++) {
+		        char c = Character.toLowerCase(string.charAt(x));
+		        if(c == a || c == e || c == i || c == o || c == u) {
+		            firstVowel = x;
+		            break;
+		        }
+		    }
+		    if(start != firstVowel) {
+		        String startString = string.substring(firstVowel, end);
+		        String endString = string.substring(start, firstVowel) + "ay";
+		        return startString+endString;
+		    }
+		return string;
+		}
 
 	/**
 	 * 9. An Armstrong number is a number that is the sum of its own digits each
@@ -363,9 +390,30 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isArmstrongNumber(int input) {
-		// TODO Write an implementation for this method declaration
-		return false;
-	}
+
+		int originalNumber, remainder, result = 0, counter = 0;
+		
+		originalNumber = input;
+				
+		while (originalNumber != 0)
+		{
+			counter++;
+			originalNumber = originalNumber/10;
+		}
+	    
+		originalNumber = input;
+	   
+		while (originalNumber != 0)
+	    {
+	        remainder = originalNumber % 10;
+            result += Math.pow(remainder, counter);
+            originalNumber /= 10;
+        }
+	        if(input == result)
+	        	return true;
+	        else
+	        	return false;
+		}
 
 	/**
 	 * 10. Compute the prime factors of a given natural number.
@@ -378,8 +426,17 @@ public class EvaluationService {
 	 * @return
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		List<Long> primefactors = new ArrayList<>();
+		Long copyOfInput = l;
+		
+		for (int i = 2; i <= copyOfInput; i++) {
+			if (copyOfInput % i == 0) {
+				primefactors.add((long) i);
+				copyOfInput /= i;
+				i--;
+			}
+		}
+		return primefactors;
 	}
 
 	/**
@@ -415,10 +472,26 @@ public class EvaluationService {
 			super();
 			this.key = key;
 		}
-
+		
+		static String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
+		
 		public String rotate(String string) {
+				String plainText = string.toLowerCase();
+			System.out.println(plainText);
+			String cipherText = "";
+			for (int i = 0; i < plainText.length(); i++)
+			{
+				int charPosition = ALPHABET.indexOf(plainText.charAt(i));
+				int keyVal = (key + charPosition) % 26;
+				//System.out.println (key);
+				//System.out.println (keyVal);
+				//System.out.println (key);
+				char replaceVal = ALPHABET.charAt(keyVal);
+				cipherText += replaceVal;
+			}	
 			// TODO Write an implementation for this method declaration
-			return null;
+			System.out.println(cipherText);
+		return cipherText;
 		}
 
 	}
@@ -436,8 +509,19 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int calculateNthPrime(int i) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		int count=0, num=1, x;
+		 while (count < i){
+		      num=num+1;
+		      for (x = 2; x <= num; x++){
+		        if (num % x == 0) {
+		          break;
+		        }
+		      }
+		      if ( x == num){
+		        count = count+1;
+		      }
+		    }
+			return num;
 	}
 
 	/**
@@ -473,7 +557,21 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String encode(String string) {
-			// TODO Write an implementation for this method declaration
+			String cipherText = "";
+	        for(Character c: string.toLowerCase().toCharArray()) {
+	            if(cipherText.length() % 6 == 5)
+	                cipherText += " ";
+	            cipherText += cipher(c);
+	        }
+	        return cipherText.trim();
+	    }
+
+	    private static String cipher(Character c) {
+	        if('0' <= c && c <= '9')
+	            return String.valueOf(c);
+	        else if ('a' <= c && c <= 'z')
+	            return String.valueOf((char) (219 - (int) c));
+	        else
 			return null;
 		}
 
