@@ -26,7 +26,6 @@ public class EvaluationService {
 			reverse = reverse + string.charAt(i);
 		}
 		return reverse;
-
 	}
 	
 			
@@ -148,9 +147,7 @@ public class EvaluationService {
 	 */
 	
 		public int getScrabbleScore(String string) {
-			
-		//	System.out.println(string);
-			
+					
 		       string.toUpperCase();
 				
 		       int scrabbleScore = 0;	
@@ -158,7 +155,6 @@ public class EvaluationService {
 				for (int i = 0; i < string.length(); i++) {	
 					scrabbleScore += scrabbleLetterPick(string.charAt(i));
 				}
-		//		System.out.println(scrabbleScore);
 				return scrabbleScore;
 			}
 		}
@@ -202,7 +198,6 @@ public class EvaluationService {
 			default:
 				return -1;
 			}
-	
 	}
     		
 	
@@ -308,7 +303,6 @@ public class EvaluationService {
 		private List<T> sortedList;
 
 		public int indexOf(T t) {
-			// TODO Write an implementation for this method declaration
 			return 0;
 		}
 
@@ -346,10 +340,7 @@ public class EvaluationService {
 	 */
 
 	public String toPigLatin(String string) {
-		//"apple"    "appleay"
-		//"therapy"   "erapythay"
-		//"school"    "oolschay"
-		
+
 		    char a = 'a';
 		    char e = 'e';
 		    char i = 'i';
@@ -476,8 +467,7 @@ public class EvaluationService {
 		static String ALPHABET = "abcdefghijklmnopqrstuvwxyz";
 		
 		public String rotate(String string) {
-				String plainText = string.toLowerCase();
-			System.out.println(plainText);
+			String plainText = string.toLowerCase();
 			String cipherText = "";
 			for (int i = 0; i < plainText.length(); i++)
 			{
@@ -489,8 +479,6 @@ public class EvaluationService {
 				char replaceVal = ALPHABET.charAt(keyVal);
 				cipherText += replaceVal;
 			}	
-			// TODO Write an implementation for this method declaration
-			System.out.println(cipherText);
 		return cipherText;
 		}
 
@@ -548,8 +536,8 @@ public class EvaluationService {
 	 * rxpyi ldmul cqfnk hlevi gsvoz abwlt gives thequickbrownfoxjumpsoverthelazydog
 	 *
 	 */
+	 // Question 13
 	static class AtbashCipher {
-
 		/**
 		 * Question 13
 		 * 
@@ -566,15 +554,6 @@ public class EvaluationService {
 	        return cipherText.trim();
 	    }
 
-	    private static String cipher(Character c) {
-	        if('0' <= c && c <= '9')
-	            return String.valueOf(c);
-	        else if ('a' <= c && c <= 'z')
-	            return String.valueOf((char) (219 - (int) c));
-	        else
-			return null;
-		}
-
 		/**
 		 * Question 14
 		 * 
@@ -582,8 +561,19 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String decode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			String clearText = "";
+	        for(Character c: string.toLowerCase().toCharArray())
+	            clearText += cipher(c);
+			return clearText;
+		}
+		
+		private static String cipher(Character c) {
+	        if('0' <= c && c <= '9')
+	            return String.valueOf(c);
+	        else if ('a' <= c && c <= 'z')
+	            return String.valueOf((char) (219 - (int) c));
+	        else
+			return "";
 		}
 	}
 
@@ -628,9 +618,28 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isPangram(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
-	}
+		
+		boolean[] alphaList = new boolean[26]; 
+	      int index = 0;
+	      int flag = 1;
+	      for (int i = 0; i < string.length(); i++) {
+	         if ( string.charAt(i) >= 'A' && string.charAt(i) <= 'Z') {
+	            index = string.charAt(i) - 'A'; 
+	         }else if( string.charAt(i) >= 'a' &&  string.charAt(i) <= 'z') {
+	            index = string.charAt(i) - 'a'; 
+	         }
+	         alphaList[index] = true; 
+	      }
+	      for (int i = 0; i <= 25; i++) {
+	         if (alphaList[i] == false)
+	            flag = 0;
+	      }
+	     if (flag == 1)
+	    	return true;
+	      else
+	    	  return false;
+	   }
+
 
 	/**
 	 * 17. Calculate the moment when someone has lived for 10^9 seconds.
@@ -700,8 +709,54 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isLuhnValid(String string) {
-		// TODO Write an implementation for this method declaration
-		return false;
+		
+		System.out.println(string);
+		/*int sum = 0;
+        boolean alternate = false;
+        for (int i = string.length() - 1; i >= 0; i--)
+        {
+            int n = Integer.parseInt(string.substring(i, i + 1));
+            if (alternate)
+            {
+                n *= 2;
+                if (n > 9)
+                {
+                    n = (n % 10) + 1;
+                }
+            }
+            sum += n;
+            alternate = !alternate;
+        }
+       //System.out.println(sum % 10 == 0);
+        System.out.println(alternate);*/
+		
+		int[] ints = new int[string.length()];
+		
+		System.out.println(string.length());
+		for (int i = 0; i < string.length(); i++) {
+			ints[i] = Integer.parseInt(string.substring(i, i + 1));
+		}
+		for (int i = ints.length - 2; i >= 0; i = i - 2) {
+			int j = ints[i];
+			j = j * 2;
+			if (j > 9) {
+				j = j % 10 + 1;
+			}
+			ints[i] = j;
+		}
+		int sum = 0;
+		for (int i = 0; i < ints.length; i++) {
+			sum += ints[i];
+		}
+		if (sum % 10 == 0) {
+			System.out.println(string + " is a valid credit card number");
+		} else {
+			System.out.println(string + " is an invalid credit card number");
+		}
+		//return false;
+			
+		return (sum % 10 == 0);
+    
 	}
 
 	/**
